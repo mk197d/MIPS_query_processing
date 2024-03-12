@@ -1,0 +1,2 @@
+# MIPS_query_processing
+  The MIPS assembly language program "queryProcessing.s" was meticulously crafted to efficiently handle input containing an array of unique elements alongside a stream of queries. With a keen focus on accuracy and performance, the program seamlessly processes each query sequentially, diligently checking for the presence of the queried number within the array. If the queried number is found, the program promptly outputs the count of elements smaller than the queried number; otherwise, it returns -1 to denote absence.
