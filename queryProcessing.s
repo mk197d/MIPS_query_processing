@@ -114,12 +114,32 @@ merge:
 # a0 -> left index
 # a2 -> middle index
 # a1 -> right index
-
+                                     ╔═══════════════════╗                       
+                                     ║                   ║                       
+                                     ║                   ║                       
+                                     ║                   ║                       
+          Stack Pointer (sp)  ─────> ║ ───────────────── ║     ▲                 
+                                     ║   right_arr size  ║     │                 
+                           sp + 4    ║ ───────────────── ║     │                 
+                                     ║   left_arr size   ║     │                 
+                           sp + 8    ║ ───────────────── ║     │                 
+                                     ║    middle index   ║     │                 
+                          sp + 12    ║ ───────────────── ║     │                 
+                                     ║    right index    ║     │  24 bytes       
+                          sp + 16    ║ ───────────────── ║     │                 
+                                     ║     left index    ║     │                 
+                          sp + 20    ║ ───────────────── ║     │                 
+                                     ║   return address  ║     │                 
+                          sp + 24    ║                   ║     │                 
+                                     ║  xxxxxxxxxxxxxxx  ║     ▼                 
+                                     ║       BOTTOM      ║                       
+                                     ╚═══════════════════╝                       
+                                                                            
     addi $sp, $sp, -24   # Making space for the return address and the left, right and middle indicies on the stack
-    sw $ra, 0($sp)  # Storing the return address on the stack
-    sw $a0, 4($sp)  # At sp + 4 left index is stored
-    sw $a1, 8($sp)  # At sp + 8 right index is stored
-    sw $a2, 12($sp) # At sp + 12 middle index is stored
+    sw $ra, 0($sp)  
+    sw $a0, 4($sp)  
+    sw $a1, 8($sp)  
+    sw $a2, 12($sp) 
 
     # Storing the two halves in two arrays L and R, and then merging them in the original array
 
@@ -131,8 +151,8 @@ merge:
     sub $t2, $a1, $a2
 
     # Storing the sizes on the stack
-    sw $t1, 16($sp) # At sp + 16 size of the left array is stored
-    sw $t2, 20($sp) # At sp + 20 size of the right array is stored
+    sw $t1, 16($sp) 
+    sw $t2, 20($sp) 
 
     # Copying the left half of the array into L
     lw $a0, 4($sp)  # Register a0 contains the first index to be copied to L
